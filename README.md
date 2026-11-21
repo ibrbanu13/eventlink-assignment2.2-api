@@ -1,3 +1,11 @@
+# EventLink
+ 
+EventLink helps university students discover campus and club events, and lets organizers publish and manage them. This repository holds the Assignment 2 prototype: a REST API with mocked data, token authentication and role-based access.
+ 
+- **Demo video:** [TODO: add the YouTube link, 5 minutes at most]
+- **API documentation:** [documentation/API.md](documentation/API.md)
+- **Postman collection:** [documentation/postman/eventlink.postman_collection.json](documentation/postman/eventlink.postman_collection.json)
+
 ## Installation and running the backend
 
 ### Requirements
@@ -44,6 +52,12 @@ python -m uvicorn app.main:app --reload
 
 The API runs at `http://127.0.0.1:8000`
 
+| URL | What it is |
+|---|---|
+| `http://127.0.0.1:8000/api/v1/greeting` | HTML welcome page |
+| `http://127.0.0.1:8000/docs` | Interactive Swagger UI |
+| `http://127.0.0.1:8000/api/v1/events` | Events API (needs a token) |
+
 ### Mock tokens
 
 Send the token in the `Authorization` header: `Authorization: Bearer <token>`
@@ -58,5 +72,15 @@ Send the token in the `Authorization` header: `Authorization: Bearer <token>`
 ### Notes
 
 - Data is stored in memory and **resets every time the server restarts**.
-- Full endpoint documentation: [documentation/API.md](documentation/API.md).
-- Example requests: `documentation/postman/eventlink.postman_collection.json`.
+- Full endpoint documentation, error codes and examples: [documentation/API.md](documentation/API.md).
+- To try the requests, import the Postman collection and run the folders in order.
+
+## Team and responsibilities
+ 
+| Member | Student ID | Responsibilities |
+|---|---|---|
+| Banu Ibrahimli | 24086 | Events CRUD endpoints, mock data, pagination |
+| Zahra Ahmadova | 23945 | Token authentication, role checks, error handling, validation |
+| Fatima Hasanzada | 23242 | Greeting page, API documentation, Postman collection, README |
+ 
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for details.
