@@ -52,6 +52,12 @@ python -m uvicorn app.main:app --reload
 
 The API runs at `http://127.0.0.1:8000`
 
+| URL | What it is |
+|---|---|
+| `http://127.0.0.1:8000/api/v1/greeting` | HTML welcome page |
+| `http://127.0.0.1:8000/docs` | Interactive Swagger UI |
+| `http://127.0.0.1:8000/api/v1/events` | Events API (needs a token) |
+
 ### Mock tokens
 
 Send the token in the `Authorization` header: `Authorization: Bearer <token>`
