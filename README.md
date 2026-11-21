@@ -87,7 +87,7 @@ See [CONTRIBUTORS.md](CONTRIBUTORS.md) for details.
 
 ## Output of git shortlog -sn --all
 
-31  Banu Ibrahimli
-18  fhasanzade2007-cpu
-9  ZahraAhmadova
+31  Banu Ibrahimli\
+18  fhasanzade2007-cpu\
+9  ZahraAhmadova\
 1  Zahra Ahmadova
