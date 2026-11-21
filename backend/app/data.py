@@ -147,7 +147,7 @@ def create_event(fields, owner_id):
     event = {
         "id": event_id,
         "title": fields["title"],
-        "description": fields.get("description"),
+        "description": fields.get("description", []),
         "category": fields.get("category"),
         "location": fields["location"],
         "startsAt": fields["startsAt"],
