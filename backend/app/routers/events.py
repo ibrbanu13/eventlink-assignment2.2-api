@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app import data
 from app.auth import get_current_user, is_admin
@@ -28,3 +28,10 @@ def list_events(
         "Events retrieved successfully.",
         meta={"total": total, "page": page, "perPage": perPage},
     )
+
+@router.get("/{event_id}")
+def get_event(event_id: str, user=Depends(get_current_user)):
+    event = data.get_event(event_id)
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found.")
+    return success_response(with_status(event), "Event retrieved successfully.")
