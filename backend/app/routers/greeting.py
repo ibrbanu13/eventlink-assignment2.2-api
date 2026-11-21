@@ -38,6 +38,7 @@ ENDPOINTS = [
     ("DELETE", "/api/v1/events/{id}", "Delete an event."),
 ]
 
+API_VERSION = "v1"
 
 def render_page():
     team_items = "".join(
@@ -63,6 +64,7 @@ def render_page():
   <ul>{team_items}</ul>
   <h2>Endpoints</h2>
   <ul>{endpoint_rows}</ul>
+  <p>Status: API is running &bull; Version {API_VERSION}</p>
 </body>
 </html>"""
 
