@@ -2,10 +2,10 @@ from itertools import count
 
 # --- Mock users ---------------------------------------------------------
 # token -> user. auth.py uses this to turn "Authorization: Bearer <token>" into a user.
-USERS = {                                                                                       # Category                -   category
+USERS = {                                                                             # Category                -   category
     "user-a-token": {"id": "user-a", "name": "ADA SITE", "role": "organizer"},        # ADA SITE                -   adaSite-talk ; adaSite-seminar
     "user-b-token": {"id": "user-b", "name": "ADA MUN Club", "role": "organizer"},    # ADA MUN Club            -   adaClub-mun;   
-    "admin-token": {"id": "admin", "name": "Student Services", "role": "admin"},                # ADA Student Services    -   adaOffice-studentService
+    "admin-token": {"id": "admin", "name": "Student Services", "role": "admin"},      # ADA Student Services    -   adaOffice-studentService
 }
 
 # --- Mock events --------------------------------------------------------
