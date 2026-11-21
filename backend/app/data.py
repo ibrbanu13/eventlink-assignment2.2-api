@@ -129,13 +129,14 @@ def get_event(event_id):
     return _events.get(event_id)
 
 
-def find_duplicate(owner_id, title, date, location):
+def find_duplicate(owner_id, title, startsAt, endsAt, location):
 #   (used for the 409 Conflict case), or None
     for event in _events.values():
         if (
             event["ownerId"] == owner_id
             and event["title"].lower() == title.lower()
-            and event["date"] == date
+            and event["startsAt"] == startsAt
+            and event["endsAt"] == endsAt
             and event["location"].lower() == location.lower()
         ):
             return event
