@@ -1,3 +1,5 @@
+from html import escape
+
 from fastapi import APIRouter
 from fastapi.responses import HTMLResponse
 
@@ -9,8 +11,31 @@ PROJECT_DESCRIPTION = (
     "and lets organizers publish and manage them."
 )
 
+TEAM = [
+    {
+        "name": "Banu Ibrahimli",
+        "student_id": "24086",
+        "summary": "Events CRUD endpoints, mock data and pagination.",
+    },
+    {
+        "name": "Zahra Ahmadova",
+        "student_id": "23945",
+        "summary": "Token authentication, role checks, error handling and validation.",
+    },
+    {
+        "name": "Fatima Hasanzada",
+        "student_id": "23242",
+        "summary": "Greeting page, API documentation, Postman collection and README.",
+    },
+]
+
 
 def render_page():
+    team_items = "".join(
+        f"<li><strong>{escape(m['name'])}</strong> ({escape(m['student_id'])})"
+        f"<br>{escape(m['summary'])}</li>"
+        for m in TEAM
+    )
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,6 +45,8 @@ def render_page():
 <body>
   <h1>Welcome to {PROJECT_NAME}</h1>
   <p>{PROJECT_DESCRIPTION}</p>
+  <h2>Team</h2>
+  <ul>{team_items}</ul>
 </body>
 </html>"""
 
