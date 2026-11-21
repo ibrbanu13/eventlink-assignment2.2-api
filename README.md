@@ -74,3 +74,13 @@ Send the token in the `Authorization` header: `Authorization: Bearer <token>`
 - Data is stored in memory and **resets every time the server restarts**.
 - Full endpoint documentation, error codes and examples: [documentation/API.md](documentation/API.md).
 - To try the requests, import the Postman collection and run the folders in order.
+
+## Team and responsibilities
+ 
+| Member | Student ID | Responsibilities |
+|---|---|---|
+| Banu Ibrahimli | 24086 | Events CRUD endpoints, mock data, pagination |
+| Zahra Ahmadova | 23945 | Token authentication, role checks, error handling, validation |
+| Fatima Hasanzada | 23242 | Greeting page, API documentation, Postman collection, README |
+ 
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for details.
