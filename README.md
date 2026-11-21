@@ -1,3 +1,11 @@
+# EventLink
+ 
+EventLink helps university students discover campus and club events, and lets organizers publish and manage them. This repository holds the Assignment 2 prototype: a REST API with mocked data, token authentication and role-based access.
+ 
+- **Demo video:** [TODO: add the YouTube link, 5 minutes at most]
+- **API documentation:** [documentation/API.md](documentation/API.md)
+- **Postman collection:** [documentation/postman/eventlink.postman_collection.json](documentation/postman/eventlink.postman_collection.json)
+
 ## Installation and running the backend
 
 ### Requirements
