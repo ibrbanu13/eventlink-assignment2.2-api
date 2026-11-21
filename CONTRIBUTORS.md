@@ -28,7 +28,6 @@
 - API documentation (`documentation/API.md`)
 - Postman collection (`documentation/postman/`)
 - `README.md`: installation guide, `git shortlog` output and work summary
-- Demo video
 
 ## Shared work
 
