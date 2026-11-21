@@ -62,5 +62,5 @@ def update_event(event_id: str, body: EventUpdate, user=Depends(get_current_user
     if event is None:
         raise HTTPException(status_code=404, detail="Event not found.")
     can_access_event(user, event)
-    updated = data.update_event(event_id, body.model_dump())
+    updated = data.update_event(event_id, body.model_dump(exclude_unset=True))
     return success_response(with_status(updated), "Event updated successfully.")
