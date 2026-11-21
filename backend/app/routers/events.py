@@ -48,5 +48,10 @@ def delete_event(event_id: str, user=Depends(get_current_user)):
 
 @router.post("", status_code=201)
 def create_event(body: EventCreate, user=Depends(get_current_user)):
+    if data.find_duplicate(user["id"], body.title, body.startsAt, body.endsAt, body.location):
+        raise HTTPException(
+            status_code=409,
+            detail="You already have an event with the same title, start/end time and location.",
+        )
     event = data.create_event(body.model_dump(), user["id"])
     return success_response(with_status(event), "Event created successfully.")
