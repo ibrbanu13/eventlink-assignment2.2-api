@@ -72,5 +72,5 @@ Send the token in the `Authorization` header: `Authorization: Bearer <token>`
 ### Notes
 
 - Data is stored in memory and **resets every time the server restarts**.
-- Full endpoint documentation: [documentation/API.md](documentation/API.md).
-- Example requests: `documentation/postman/eventlink.postman_collection.json`.
+- Full endpoint documentation, error codes and examples: [documentation/API.md](documentation/API.md).
+- To try the requests, import the Postman collection and run the folders in order.
