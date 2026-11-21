@@ -300,3 +300,15 @@ The server starts with five events:
 | `evt_105` | Student Services |
  
 `evt_999` does not exist and can be used to demonstrate `404 Not Found`. One event is dated in the past, so its `isUpcoming` is `false`.
+
+## Design decisions
+ 
+**403 Forbidden instead of 404 for another user's event.** When a regular user asks for an event that belongs to someone else, the API answers `403`. In the full EventLink app, published events will be visible to every student, so the existence of an event is not a secret and there is nothing to hide with a `404`. A `403` also tells the client the real reason, which makes the behavior clear and easy to demonstrate.
+ 
+**`ownerId` comes from the token, never from the body.** A client cannot create events on behalf of someone else.
+ 
+**`isUpcoming` is computed, not stored.** Storing it would go stale as time passes.
+ 
+**Dates include an offset.** `startsAt` and `registrationDeadline` are ISO 8601 strings with a timezone offset, so comparisons with the current time are unambiguous.
+ 
+**`description` is an array of strings.** Each entry is one paragraph or line, which keeps long descriptions easy to display.
