@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 
 from app import data
 from app.auth import get_current_user, is_admin
@@ -14,7 +14,17 @@ def with_status(event):
 
 
 @router.get("")
-def list_events(user=Depends(get_current_user)):
+def list_events(
+    page: int = Query(1, ge=1),
+    perPage: int = Query(10, ge=1, le=100),
+    user=Depends(get_current_user),
+):
     events = data.list_events() if is_admin(user) else data.list_events(owner_id=user["id"])
-    items = [with_status(e) for e in events]
-    return success_response(items, "Events retrieved successfully.")
+    total = len(events)
+    start = (page - 1) * perPage
+    items = [with_status(e) for e in events[start:start + perPage]]
+    return success_response(
+        items,
+        "Events retrieved successfully.",
+        meta={"total": total, "page": page, "perPage": perPage},
+    )
