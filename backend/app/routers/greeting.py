@@ -126,34 +126,6 @@ def render_page():
 </html>"""
 
 
-def render_page():
-    team_items = "".join(
-        f"<li><strong>{escape(m['name'])}</strong> ({escape(m['student_id'])})"
-        f"<br>{escape(m['summary'])}</li>"
-        for m in TEAM
-    )
-    endpoint_rows = "".join(
-        f'<li><span class="method {method.lower()}">{method}</span> '
-        f"<code>{escape(path)}</code> {escape(description)}</li>"
-        for method, path, description in ENDPOINTS
-    )
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>{PROJECT_NAME}</title>
-</head>
-<body>
-  <h1>Welcome to {PROJECT_NAME}</h1>
-  <p>{PROJECT_DESCRIPTION}</p>
-  <h2>Team</h2>
-  <ul>{team_items}</ul>
-  <h2>Endpoints</h2>
-  <ul>{endpoint_rows}</ul>
-  <p>Status: API is running &bull; Version {API_VERSION}</p>
-</body>
-</html>"""
-
 @router.get("/greeting", response_class=HTMLResponse)
 def greeting():
     return HTMLResponse(content=render_page())
