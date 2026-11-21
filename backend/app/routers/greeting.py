@@ -29,12 +29,26 @@ TEAM = [
     },
 ]
 
+ENDPOINTS = [
+    ("GET", "/api/v1/greeting", "This page."),
+    ("GET", "/api/v1/events", "List events (admins see all, organizers see their own)."),
+    ("GET", "/api/v1/events/{id}", "Get one event."),
+    ("POST", "/api/v1/events", "Create an event."),
+    ("PUT", "/api/v1/events/{id}", "Update an event."),
+    ("DELETE", "/api/v1/events/{id}", "Delete an event."),
+]
+
 
 def render_page():
     team_items = "".join(
         f"<li><strong>{escape(m['name'])}</strong> ({escape(m['student_id'])})"
         f"<br>{escape(m['summary'])}</li>"
         for m in TEAM
+    )
+    endpoint_rows = "".join(
+        f'<li><span class="method {method.lower()}">{method}</span> '
+        f"<code>{escape(path)}</code> {escape(description)}</li>"
+        for method, path, description in ENDPOINTS
     )
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -47,6 +61,8 @@ def render_page():
   <p>{PROJECT_DESCRIPTION}</p>
   <h2>Team</h2>
   <ul>{team_items}</ul>
+  <h2>Endpoints</h2>
+  <ul>{endpoint_rows}</ul>
 </body>
 </html>"""
 
