@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app import data
 from app.auth import ensure_can_access, get_current_user, is_admin
-from app.schemas import parse_dt, success_response
+from app.schemas import EventCreate, parse_dt, success_response
 
 router = APIRouter(prefix="/api/v1/events", tags=["events"])
 
@@ -45,3 +45,8 @@ def delete_event(event_id: str, user=Depends(get_current_user)):
     ensure_can_access(user, event)
     data.delete_event(event_id)
     return success_response(None, "Event deleted successfully.")
+
+@router.post("", status_code=201)
+def create_event(body: EventCreate, user=Depends(get_current_user)):
+    event = data.create_event(body.model_dump(), user["id"])
+    return success_response(with_status(event), "Event created successfully.")
