@@ -3,8 +3,8 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from app import data
-from app.auth import ensure_can_access, get_current_user, is_admin
-from app.schemas import EventCreate, parse_dt, success_response
+from app.auth import can_access_event, get_current_user, is_admin
+from app.schemas import EventCreate, EventUpdate, parse_dt, success_response
 
 router = APIRouter(prefix="/api/v1/events", tags=["events"])
 
@@ -34,7 +34,7 @@ def get_event(event_id: str, user=Depends(get_current_user)):
     event = data.get_event(event_id)
     if event is None:
         raise HTTPException(status_code=404, detail="Event not found.")
-    ensure_can_access(user, event)
+    can_access_event(user, event)
     return success_response(with_status(event), "Event retrieved successfully.")
 
 @router.delete("/{event_id}")
@@ -42,7 +42,7 @@ def delete_event(event_id: str, user=Depends(get_current_user)):
     event = data.get_event(event_id)
     if event is None:
         raise HTTPException(status_code=404, detail="Event not found.")
-    ensure_can_access(user, event)
+    can_access_event(user, event)
     data.delete_event(event_id)
     return success_response(None, "Event deleted successfully.")
 
@@ -55,3 +55,12 @@ def create_event(body: EventCreate, user=Depends(get_current_user)):
         )
     event = data.create_event(body.model_dump(), user["id"])
     return success_response(with_status(event), "Event created successfully.")
+
+@router.put("/{event_id}")
+def update_event(event_id: str, body: EventUpdate, user=Depends(get_current_user)):
+    event = data.get_event(event_id)
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found.")
+    can_access_event(user, event)
+    updated = data.update_event(event_id, body.model_dump())
+    return success_response(with_status(updated), "Event updated successfully.")
