@@ -36,3 +36,12 @@ def get_event(event_id: str, user=Depends(get_current_user)):
         raise HTTPException(status_code=404, detail="Event not found.")
     ensure_can_access(user, event)
     return success_response(with_status(event), "Event retrieved successfully.")
+
+@router.delete("/{event_id}")
+def delete_event(event_id: str, user=Depends(get_current_user)):
+    event = data.get_event(event_id)
+    if event is None:
+        raise HTTPException(status_code=404, detail="Event not found.")
+    ensure_can_access(user, event)
+    data.delete_event(event_id)
+    return success_response(None, "Event deleted successfully.")
