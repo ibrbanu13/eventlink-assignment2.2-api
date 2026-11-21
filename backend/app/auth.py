@@ -26,3 +26,6 @@ def get_current_user(authorization: str | None = Header(default=None)):
     return user
 def can_access_event(user, event):
     return user["role"] == "admin" or event["ownerId"] == user["id"]
+
+def is_admin(user):
+    return user["role"] == "admin"
